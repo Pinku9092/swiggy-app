@@ -15,16 +15,16 @@ public class RestaurantServiceClient {
     private RestTemplate template;
 
     public OrderResponseDTO fetchOrderStatus(String orderId) {
-        OrderResponseDTO orderResponseDTO=null;
+        OrderResponseDTO orderResponseDTO = null;
         try {
             orderResponseDTO= template.getForObject("http://RESTAURANT-SERVICE/restaurant/orders/status/" + orderId, OrderResponseDTO.class);
 
         } catch (HttpServerErrorException errorException) {
-          //  log.error("RestaurantServiceClient::fetchOrderStatus caught the HttpServer server error {}", errorException.getResponseBodyAsString());
+            //  log.error("RestaurantServiceClient::fetchOrderStatus caught the HttpServer server error {}", errorException.getResponseBodyAsString());
             System.out.println("RestaurantServiceClient::fetchOrderStatus caught the HttpServer server error :" +errorException.getResponseBodyAsString());
             throw new SwiggyServiceException(errorException.getResponseBodyAsString());
         } catch (Exception ex) {
-        //    log.error("RestaurantServiceClient::fetchOrderStatus caught the generic error {}", ex.getMessage());
+            //    log.error("RestaurantServiceClient::fetchOrderStatus caught the generic error {}", ex.getMessage());
             System.out.println("RestaurantServiceClient::fetchOrderStatus caught the generic error :" +ex.getMessage());
 
         }
